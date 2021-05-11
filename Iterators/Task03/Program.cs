@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 /* На вход подается число N.
  * На каждой из следующих N строках записаны ФИО человека, 
@@ -37,8 +38,10 @@ namespace Task03
         {
             try
             {
-                int N =
+                int N = int.Parse(Console.ReadLine());
                 Person[] people = new Person[N];
+
+                for (int i = 0; i < N; i++) people[i] = new Person(Console.ReadLine());
 
                 People peopleList = new People(people);
 
@@ -52,13 +55,21 @@ namespace Task03
             {
                 Console.Write("error");
             }
+            Console.ReadLine();
         }
     }
 
-    public class Person
+    public class Person: IComparable
     {
         public string firstName;
         public string lastName;
+        private string v;
+
+        public Person(string input)
+        {
+            firstName = input.Split()[1];
+            lastName = input.Split()[0];
+        }
 
         public Person(string firstName, string lastName)
         {
@@ -66,13 +77,30 @@ namespace Task03
             this.lastName = lastName;
         }
 
-    
+        public int CompareTo(object o)
+        {
+            Person person2 = o as Person;
+            return this.ToString().CompareTo(person2.ToString());
+        }
+
+        public override string ToString()
+        {
+            return $"{lastName} {firstName[0]}.";
+        }
+
+
     }
 
 
     public class People : IEnumerable
     {
         private Person[] _people;
+
+        public People(Person[] people)
+        {
+            _people = people;
+        }
+
         public Person[] GetPeople
         {
             get {
@@ -94,23 +122,38 @@ namespace Task03
     public class PeopleEnum : IEnumerator
     {
         public Person[] _people;
+        int position = -1;
 
-      
+        public PeopleEnum(Person[] people)
+        {
+            var peopleNew = new List<Person>();
+            foreach (Person person in people)
+            {
+                peopleNew.Add(person);
+            }
+            peopleNew.Sort();
+            _people = peopleNew.ToArray();
+        }
 
         public bool MoveNext()
         {
-            
+            if (position < _people.Length - 1)
+            {
+                position++;
+                return true;
+            }
+            return false;
+
         }
 
         public void Reset()
         {
-            
+            position = -1;
         }
-       
 
-        public Person Current
-        {
-            
-        }
+
+        public Person Current => _people[position];
+
+        object IEnumerator.Current => throw new NotImplementedException();
     }
 }

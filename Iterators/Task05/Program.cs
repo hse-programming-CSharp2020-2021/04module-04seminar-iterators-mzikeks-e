@@ -49,6 +49,10 @@ namespace Task05
             {
                 Console.WriteLine("ooops");
             }
+            catch (Exception)
+            {
+                Console.WriteLine("error");
+            }
             Console.ReadKey();
         }
 
@@ -68,7 +72,7 @@ namespace Task05
         int current = 0;
         bool reverse = false;
 
-        public object Current => (int)Math.Pow(current, 10);
+        public object Current => (long)Math.Pow(current, 10);
 
         public bool MoveNext()
         {
@@ -85,7 +89,7 @@ namespace Task05
         public void Reset()
         {
             reverse = !reverse;
-            if (reverse) current = max+1;
+            if (reverse) current = max + 1;
             else current = 0;
         }
 

@@ -24,28 +24,28 @@ namespace Task01
         {
             try
             {
-                int value = int.Parse(Console.ReadLine());
-                foreach (int el in Fibonacci(value))
+                long value = long.Parse(Console.ReadLine());
+                foreach (long el in Fibonacci(value))
                 {
                     Console.Write(el + " ");
                 }
             }
-            catch (ArgumentException)
+            catch (Exception)
             {
                 Console.Write("error");
             }
             Console.ReadKey();
         }
 
-        public static IEnumerable<int> Fibonacci(int maxValue)
+        public static IEnumerable<long> Fibonacci(long maxValue)
         {
             if (maxValue > 1)
             {
                 yield return 1;
                 yield return 1;
             }
-            int last1 = 1;
-            int last2 = 1;
+            long last1 = 1;
+            long last2 = 1;
             while (last1 + last2 <= maxValue)
             {
                 yield return last1 + last2;

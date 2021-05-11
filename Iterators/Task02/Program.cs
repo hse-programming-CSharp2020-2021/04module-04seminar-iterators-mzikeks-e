@@ -40,16 +40,17 @@ namespace Task02
             this.start = start;
         }
 
-        public IEnumerator<string> GetEnumerator()
+        public IEnumerator GetEnumerator()
         {
-
-            for (int i = start - 1; i < values.Length; i++) yield return values[i];
-            for (int i = 0; i < start - 1; i++) yield return values[i];
+            // Зачем этот метод нужен я не понял :(
+            throw new ArgumentException();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+
+        IEnumerator<string> IEnumerable<string>.GetEnumerator()
         {
-            throw new ArgumentException();
+            for (int i = start - 1; i < values.Length; i++) yield return values[i];
+            for (int i = 0; i < start - 1; i++) yield return values[i];
         }
     }
 

@@ -41,16 +41,21 @@ namespace Task04
             {
                 Console.WriteLine("error");
             }
+            catch (Exception)
+            {
+                Console.WriteLine("error");
+            }
             Console.ReadLine();
             
         }
 
         static void IterateThroughEnumeratorWithoutUsingForeach(IEnumerator enumerator)
         {
+            if (enumerator.MoveNext())
+                Console.Write(enumerator.Current);
+
             while (enumerator.MoveNext())
-            {
-                Console.Write(enumerator.Current + " ");
-            }
+                Console.Write(" " + enumerator.Current);
         }
     }
 

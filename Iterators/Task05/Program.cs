@@ -30,6 +30,8 @@ namespace Task05
         {
             try
             {
+                var value = int.Parse(Console.ReadLine());
+
                 MyDigits myDigits = new MyDigits();
                 IEnumerator enumerator = myDigits.MyEnumerator(value);
 
@@ -47,20 +49,50 @@ namespace Task05
             {
                 Console.WriteLine("ooops");
             }
+            Console.ReadKey();
         }
 
         static void IterateThroughEnumeratorWithoutUsingForeach(IEnumerator enumerator)
         {
+            if (enumerator.MoveNext())
+                Console.Write(enumerator.Current);
+
+            while (enumerator.MoveNext())
+                Console.Write(" " + enumerator.Current);
         }
     }
 
     class MyDigits : IEnumerator // НЕ МЕНЯТЬ ЭТУ СТРОКУ
     {
+        int max;
+        int current = 0;
+        bool reverse = false;
+
+        public object Current => (int)Math.Pow(current, 10);
 
         public bool MoveNext()
         {
-           
+            if ((!reverse && current + 1 > max) || (reverse && current - 1 <= 0))
+            {
+                Reset();
+                return false;
+            }
+            if (reverse) current--;
+            else current++;
+            return true;
         }
 
+        public void Reset()
+        {
+            reverse = !reverse;
+            if (reverse) current = max+1;
+            else current = 0;
+        }
+
+        internal IEnumerator MyEnumerator(int value)
+        {
+            this.max = value;
+            return this;
+        }
     }
 }

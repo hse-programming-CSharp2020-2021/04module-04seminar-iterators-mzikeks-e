@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,6 +40,17 @@ namespace Task02
             this.start = start;
         }
 
+        public IEnumerator<string> GetEnumerator()
+        {
+
+            for (int i = start - 1; i < values.Length; i++) yield return values[i];
+            for (int i = 0; i < start - 1; i++) yield return values[i];
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new ArgumentException();
+        }
     }
 
     class Program
@@ -47,8 +59,8 @@ namespace Task02
         {
             try
             {
-                int startingIndex = 
-                string[] values = 
+                int startingIndex = int.Parse(Console.ReadLine());
+                string[] values = Console.ReadLine().Split();
 
                 foreach (string ob in new IteratorSample(values, startingIndex))
                     Console.Write(ob + " ");

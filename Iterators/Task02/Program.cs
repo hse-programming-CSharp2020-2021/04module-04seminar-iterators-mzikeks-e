@@ -42,15 +42,15 @@ namespace Task02
 
         public IEnumerator GetEnumerator()
         {
-            // Зачем этот метод нужен я не понял :(
-            throw new ArgumentException();
+            for (int i = start - 1; i < values.Length; i++) yield return values[i];
+            for (int i = 0; i < start - 1; i++) yield return values[i];          
         }
 
 
         IEnumerator<string> IEnumerable<string>.GetEnumerator()
         {
-            for (int i = start - 1; i < values.Length; i++) yield return values[i];
-            for (int i = 0; i < start - 1; i++) yield return values[i];
+            // Зачем этот метод нужен я не понял :(
+            throw new ArgumentException();
         }
     }
 
@@ -62,6 +62,7 @@ namespace Task02
             {
                 int startingIndex = int.Parse(Console.ReadLine());
                 string[] values = Console.ReadLine().Split();
+                if (startingIndex > values.Length) throw new ArgumentException();
 
                 foreach (string ob in new IteratorSample(values, startingIndex))
                     Console.Write(ob + " ");

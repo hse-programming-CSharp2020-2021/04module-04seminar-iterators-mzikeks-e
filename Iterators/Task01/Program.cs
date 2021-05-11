@@ -25,6 +25,8 @@ namespace Task01
             try
             {
                 long value = long.Parse(Console.ReadLine());
+                if (value < 1) throw new ArgumentException();
+
                 foreach (long el in Fibonacci(value))
                 {
                     Console.Write(el + " ");

@@ -62,6 +62,10 @@ namespace Task03
             {
                 Console.Write("error");
             }
+            catch (Exception)
+            {
+                Console.Write("error");
+            }
             Console.ReadLine();
         }
     }

@@ -61,20 +61,16 @@ namespace Task02
             try
             {
                 int startingIndex = int.Parse(Console.ReadLine());
-                string[] values = Console.ReadLine().Split();
+                string[] values = Console.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 if (startingIndex > values.Length) throw new ArgumentException();
 
                 foreach (string ob in new IteratorSample(values, startingIndex))
                     Console.Write(ob + " ");
                 Console.WriteLine();
             }
-            catch (ArgumentException e)
+            catch (Exception)
             {
                 Console.WriteLine("error");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("problem");
             }
 
             Console.ReadLine();
